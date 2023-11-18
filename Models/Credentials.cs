@@ -23,8 +23,9 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-namespace o_service_api.Authorization;
-
-[AttributeUsage(AttributeTargets.Method)]
-public class AllowAnonymousAttribute : Attribute
-{ }
+namespace o_service_api.Models;
+public class Credentials
+{
+    public required string Email { get; set; }
+    public required string Password { get; set; }
+}

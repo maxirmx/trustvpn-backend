@@ -23,26 +23,44 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+using o_service_api.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace o_service_api.Authorization;
+namespace o_service_api.Controllers;
 
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class AuthorizeAttribute : Attribute, IAuthorizationFilter
+public class OControllerBase : ControllerBase
 {
-    public void OnAuthorization(AuthorizationFilterContext context)
-    {
-        // skip authorization if action is decorated with [AllowAnonymous] attribute
-        var allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
-        if (allowAnonymous)
-            return;
+  protected readonly UserContext userContext;
+  protected readonly int curUserId;
 
-        // authorization
-        var userId = (int?)context.HttpContext.Items["UserId"];
-        if (userId == null) {
-            Console.WriteLine("Not logged in or role not authorized");
-            context.Result = new JsonResult(new { message = "Необходимо войти в систему." }) { StatusCode = StatusCodes.Status401Unauthorized };
-        }
+  protected ObjectResult _403()
+  {
+    return StatusCode(StatusCodes.Status403Forbidden,
+                      new { message = "Недостаточно прав для выполнения операции." });
+  }
+  protected ObjectResult _404User(int id)
+  {
+    return StatusCode(StatusCodes.Status404NotFound,
+                      new { message = $"Не удалось найти пользователя [id={id}]." });
+  }
+  protected ObjectResult _404Profile(int id)
+  {
+    return StatusCode(StatusCodes.Status404NotFound,
+                      new { message = $"Не удалось найти ghjabkm [profile id={id}]." });
+  }
+  protected ObjectResult _409Email(string email)
+  {
+    return StatusCode(StatusCodes.Status409Conflict,
+                      new { message = $"Пользователь с таким адресом электронной почты уже зарегистрирован [email = {email}]." });
+  }
+  protected OControllerBase(IHttpContextAccessor httpContextAccessor, UserContext uContext)
+  {
+    userContext = uContext;
+    curUserId = 0;
+    var htc = httpContextAccessor.HttpContext;
+    if (htc != null) {
+      var uid = htc.Items["UserId"];
+      if (uid != null) curUserId = (int)uid;
     }
+  }
 }

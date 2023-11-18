@@ -1,0 +1,29 @@
+# Copyright (c) 2023 Maxim [maxirmx] Samsonov (https://sw.consulting)
+# This file is a part of O!Service
+
+name: build-and-push
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**.adoc'
+      - '**.md'
+    tags:     [ 'v*' ]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: '${{ github.workflow }}-${{ github.job }}-${{ github.head_ref || github.ref_name }}'
+  cancel-in-progress: true
+
+jobs:
+  build-containers:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3

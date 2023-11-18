@@ -23,8 +23,9 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-namespace o_service_api.Authorization;
-
-[AttributeUsage(AttributeTargets.Method)]
-public class AllowAnonymousAttribute : Attribute
-{ }
+namespace o_service_api.Models;
+public class Reference
+{
+    public Reference(int id) { Id = id; }
+    public required int Id { get; set; }
+}

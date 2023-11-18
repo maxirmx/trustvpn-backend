@@ -23,8 +23,16 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-namespace o_service_api.Authorization;
+using System.ComponentModel.DataAnnotations.Schema;
 
-[AttributeUsage(AttributeTargets.Method)]
-public class AllowAnonymousAttribute : Attribute
-{ }
+namespace o_service_api.Models;
+
+[Table("profiles")]
+public class Profile
+{
+    [Column("id")]
+    public int Id { get; set; }
+
+    [Column("name")]
+    public required string Name { get; set; }
+}
