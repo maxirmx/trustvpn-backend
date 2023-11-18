@@ -1,0 +1,41 @@
+# Copyright (c) 2023 Maxim [maxirmx] Samsonov (https://sw.consulting)
+# This file is a part of O!Service
+
+# docker compose build
+#   docker exec -it db psql -U postgres
+# docker compose up o_backend
+
+version: '1'
+services:
+  o-backend:
+    container_name: o-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - o-db
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Database=postgres;Username=postgres;Password=postgres"
+  o-db:
+    container_name: o-db
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  o-container:
+    container_name: o-container
+    image: ghcr.io/maxirmx/o-container:latest
+    ports:
+      - "1194:1194/udp"
+
+volumes:
+  pgdata: {}
