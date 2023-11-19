@@ -17,6 +17,8 @@ services:
       - "443:443"
     depends_on:
       - o-db
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       ConnectionStrings__DefaultConnection: "Host=o-db;Database=postgres;Username=postgres;Password=postgres"
   o-db:
