@@ -75,7 +75,8 @@ public class UserViewItem
     public string Patronimic { get; set; } = "";
     public string Email { get; set; } = "";
     public bool IsAdmin { get; set; } = false;
-    public int ProfileId { get; set; } = 1;
+    public int ProfileId { get; set; } = Profile.NoProfile;
+    public string Config { get; set; } = "";
 }
 
 public class UserViewItemWithJWT :  UserViewItem

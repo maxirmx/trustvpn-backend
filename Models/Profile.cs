@@ -30,9 +30,15 @@ namespace o_service_api.Models;
 [Table("profiles")]
 public class Profile
 {
+    [NotMapped]
+    public const int NoProfile = 1;
+
     [Column("id")]
     public int Id { get; set; }
 
     [Column("name")]
     public required string Name { get; set; }
+
+    [Column("profile")]
+    public required string Prfile { get; set; }
 }

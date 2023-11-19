@@ -23,12 +23,14 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-using o_service_api.Authorization;
-using o_service_api.Data;
-using o_service_api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BCrypt.Net;
+
+using o_service_api.Authorization;
+using o_service_api.Data;
+using o_service_api.Models;
+using o_service_api.Service;
 
 namespace o_service_api.Controllers;
 
@@ -56,10 +58,6 @@ public class AuthController : ControllerBase
 
     if (user == null) return Unauthorized(new {message = "Неправильный адрес электронной почты или пароль" });
 
-    string hashToStoreInDb = BCrypt.Net.BCrypt.HashPassword(crd.Password);
-    Console.WriteLine(hashToStoreInDb);
-
-
     if (!BCrypt.Net.BCrypt.Verify(crd.Password, user.Password)) return Unauthorized();
     UserViewItemWithJWT userViewItem = new(user) {
       Token = _jwtUtils.GenerateJwtToken(user)
@@ -75,10 +73,22 @@ public class AuthController : ControllerBase
   }
 
   // dummy method to test the connection
-  [HttpGet("hello")]
+  [HttpGet("status")]
   [AllowAnonymous]
-  public ActionResult Test()
+  public async Task<ActionResult<Status>> Status()
   {
-    return Ok(new {message = "Hello, world!" });
+    OBaseContainer oContainer = new("o-container");
+    string? serviceContainerId = await oContainer.GetContainerId();
+
+    oContainer = new("o-db");
+    string? dbContainerId = await oContainer.GetContainerId();
+
+    var status = new Status(serviceContainerId, dbContainerId) {
+      Message = "Hello, world!",
+      ServiceContainerId = serviceContainerId == null ? "not found" : serviceContainerId,
+      DBContainerId = dbContainerId == null ? "not found" : dbContainerId
+    };
+
+    return Ok(status);
   }
 }

@@ -37,10 +37,9 @@ namespace o_service_api.Controllers;
 [Route("api/[controller]")]
 public class ProfilesController : OControllerBase
 {
-  private readonly ProfileContext profileContext;
-  public ProfilesController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext prContext): base(httpContextAccessor, uContext)
+  public ProfilesController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext): 
+         base(httpContextAccessor, uContext, pContext)
   {
-    profileContext = prContext;
   }
 
   // GET: api/profiles

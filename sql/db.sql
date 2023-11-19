@@ -10,12 +10,13 @@ DROP TABLE IF EXISTS "versions";
 
 CREATE TABLE "profiles" (
   "id"              SERIAL PRIMARY KEY,
-  "name"            VARCHAR(64) NOT NULL
+  "name"            VARCHAR(64) NOT NULL,
+  "profile"         VARCHAR(64) NOT NULL
 );
 
-INSERT INTO "profiles" ("name") VALUES ('Блокировка');
-INSERT INTO "profiles" ("name") VALUES ('Ограниченный траффик');
-INSERT INTO "profiles" ("name") VALUES ('Неoграниченный траффик');
+INSERT INTO "profiles" ("name", "profile") VALUES ('Блокировка', 'none');
+INSERT INTO "profiles" ("name", "profile") VALUES ('Ограниченный траффик', 'limited');
+INSERT INTO "profiles" ("name", "profile") VALUES ('Неoграниченный траффик', 'unlimited');
 
 CREATE TABLE "users" (
   "id"              SERIAL PRIMARY KEY,

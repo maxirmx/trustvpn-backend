@@ -23,20 +23,30 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-using Microsoft.EntityFrameworkCore;
-using o_service_api.Models;
+using System.IO;
+using System.Text;
+using Docker.DotNet;
+using Docker.DotNet.Models;
 
-namespace o_service_api.Data;
-public class ProfileContext : DbContext
+namespace o_service_api.Service;
+
+public class OServiceContainer : OBaseContainer
 {
-    public ProfileContext(DbContextOptions<ProfileContext> options) : base(options)
+    public OServiceContainer() : base("o-container")
     {
     }
-
-    public DbSet<Profile> Profiles { get; set; }
-
-    public bool Exists(int id)
+    public Task<string?> CreateUser(string userName, string userProfile)
     {
-        return Profiles.Any(e => e.Id == id);
+        return RunInContainer($"o-client-create {userName} {userProfile}");
+    }
+
+    public Task<string?> RemoveUser(string userName)
+    {
+        return RunInContainer($"o-client-remove {userName}");
+    }
+
+    public Task<string?> GetUserConfig(string userName)
+    {
+        return RunInContainer($"o-client-get {userName}");
     }
 }

@@ -23,20 +23,17 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-using Microsoft.EntityFrameworkCore;
-using o_service_api.Models;
-
-namespace o_service_api.Data;
-public class ProfileContext : DbContext
+namespace o_service_api.Models;
+public class Status
 {
-    public ProfileContext(DbContextOptions<ProfileContext> options) : base(options)
+    public Status(string? serviceContainerId, string? dbContainerId)
     {
+      Message = "Hello, world!";
+      ServiceContainerId = serviceContainerId == null ? "not found" : serviceContainerId;
+      DBContainerId = dbContainerId == null ? "not found" : dbContainerId;
     }
 
-    public DbSet<Profile> Profiles { get; set; }
-
-    public bool Exists(int id)
-    {
-        return Profiles.Any(e => e.Id == id);
-    }
+    public required string Message { get; set; }
+    public required string ServiceContainerId { get; set; }
+    public required string DBContainerId { get; set; }
 }

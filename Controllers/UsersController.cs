@@ -28,6 +28,7 @@ using o_service_api.Data;
 using o_service_api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using o_service_api.Service;
 
 namespace o_service_api.Controllers;
 
@@ -36,7 +37,8 @@ namespace o_service_api.Controllers;
 [Route("api/[controller]")]
 public class UsersController : OControllerBase
 {
-  public UsersController(IHttpContextAccessor httpContextAccessor, UserContext uContext) : base(httpContextAccessor, uContext)
+  public UsersController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext) :
+         base(httpContextAccessor, uContext, pContext)
   {
   }
 
@@ -58,7 +60,16 @@ public class UsersController : OControllerBase
     if (ch == null ||!ch.Value)  return _403();
 
     var user = await userContext.UserViewItem(id);
-    return (user == null) ? _404User(id) : user;
+    if (user == null) return _404User(id);
+
+    if (user.ProfileId != Profile.NoProfile) {
+      var oContainer = new OServiceContainer();
+      var output = await oContainer.GetUserConfig(user.Email);
+      if (output != null) {
+        user.Config = output;
+      }
+    }
+    return user;
   }
 
     // POST: api/users
@@ -74,8 +85,20 @@ public class UsersController : OControllerBase
     user.Password = hashToStoreInDb;
 
     userContext.Users.Add(user);
-    await userContext.SaveChangesAsync();
 
+    if (user.ProfileId != Profile.NoProfile) {
+      Profile? profile = await profileContext.Profiles.FindAsync(user.ProfileId);
+      if (profile == null) {
+        return _404Profile(user.ProfileId);
+      }
+
+      string? output = await new OServiceContainer().CreateUser(user.Email, profile.Prfile);
+      if (output == null) {
+        return _418IAmATeaPot();
+      }
+    }
+
+    await userContext.SaveChangesAsync();
     var reference = new Reference(user.Id) { Id = user.Id };
     return CreatedAtAction(nameof(GetUser), new { id = user.Id }, reference);
   }
@@ -93,6 +116,27 @@ public class UsersController : OControllerBase
     ch = adminRequired ? await userContext.CheckAdmin(curUserId) :
                          await userContext.CheckAdminOrSameUser(id, curUserId);
     if (ch == null ||!ch.Value)  return _403();
+
+    Profile? profile = await profileContext.Profiles.FindAsync(update.ProfileId);
+    if (profile == null) {
+      return _404Profile(update.ProfileId);
+    }
+
+    if (user.Email != update.Email && userContext.Exists(update.Email)) return _409Email(update.Email);
+    var oContainer = new OServiceContainer();
+
+    if (user.Email != update.Email || user.ProfileId != update.ProfileId) {
+      if (user.ProfileId != Profile.NoProfile) {
+        if (await oContainer.RemoveUser(user.Email) == null) {
+          return _418IAmATeaPot();
+        }
+      }
+      if (update.ProfileId != Profile.NoProfile) {
+        if (await oContainer.CreateUser(update.Email, profile.Prfile) == null) {
+            return _418IAmATeaPot();
+        }
+      }
+    }
 
     user.FirstName = update.FirstName;
     user.LastName = update.LastName;
@@ -118,6 +162,13 @@ public class UsersController : OControllerBase
 
     var user = await userContext.Users.FindAsync(id);
     if (user == null) return _404User(id);
+
+    OServiceContainer container = new();
+    string? output = await container.RemoveUser(user.Email);
+
+    if (output == null) {
+      return _418IAmATeaPot();
+    }
 
     userContext.Users.Remove(user);
     await userContext.SaveChangesAsync();
