@@ -1,9 +1,9 @@
 # Copyright (c) 2023 Maxim [maxirmx] Samsonov (https://sw.consulting)
 # This file is a part of TrustVPN
 
-# docker compose build
+# docker-compose build
 #   docker exec -it o-db psql -U postgres
-# docker compose up o-backend
+# docker-compose up o-backend
 
 version: '3'
 services:

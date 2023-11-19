@@ -130,3 +130,6 @@ $RECYCLE.BIN/
 .DS_Store
 
 _NCrunch*
+
+sfx
+appsettings.json
