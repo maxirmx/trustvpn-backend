@@ -22,32 +22,24 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-name: build-and-push
+name: Lint
 
 on:
   push:
-    branches: [ main ]
-    paths-ignore:
-      - '**.adoc'
-      - '**.md'
-    tags:     [ 'v*' ]
-  pull_request:
-  workflow_dispatch:
-
-concurrency:
-  group: '${{ github.workflow }}-${{ github.job }}-${{ github.head_ref || github.ref_name }}'
-  cancel-in-progress: true
 
 jobs:
-  build-containers:
+  run-linters:
+    name: Run linters
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
-      - name: Checkout
+      - name: Check out Git repository
         uses: actions/checkout@v3
 
-      - name: Docker compose
-        run: docker compose build
+      - name: Install ClangFormat
+        run: sudo apt-get install -y clang-format
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          clang_format: true
