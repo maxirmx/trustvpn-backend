@@ -54,9 +54,16 @@ jobs:
         with:
           dotnet-version: "7.0.x"
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          dotnet_format: true
-          auto_fix: true
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+     - name: Install dotnet-format
+        run: dotnet tool install -g dotnet-format
+
+      - name: Run dotnet-format
+        run: dotnet-format --check --fix
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "Automated changes" || echo "No changes to commit"
+          git push
