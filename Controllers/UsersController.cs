@@ -60,7 +60,16 @@ public class UsersController : OControllerBase
     if (ch == null ||!ch.Value)  return _403();
 
     var user = await userContext.UserViewItem(id);
-    return (user == null) ? _404User(id) : user;
+    if (user == null) return _404User(id);
+
+    if (user.ProfileId != Profile.NoProfile) {
+      var oContainer = new OServiceContainer();
+      var output = await oContainer.GetUserConfig(user.Email);
+      if (output != null) {
+        user.Config = output;
+      }
+    }
+    return user;
   }
 
     // POST: api/users
@@ -87,7 +96,6 @@ public class UsersController : OControllerBase
       if (output == null) {
         return _418IAmATeaPot();
       }
-      Console.WriteLine($"CreateUser: {output}");
     }
 
     await userContext.SaveChangesAsync();
