@@ -26,10 +26,21 @@ name: Lint
 
 on:
   push:
+    branches: [ main ]
+    paths-ignore:
+      - '**.adoc'
+      - '**.md'
+    tags:     [ 'v*' ]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: '${{ github.workflow }}-${{ github.job }}-${{ github.head_ref || github.ref_name }}'
+  cancel-in-progress: true
 
 jobs:
   run-linters:
-    name: Run linters
+    name: Run C# linter
     runs-on: ubuntu-latest
 
     steps:
@@ -45,4 +56,3 @@ jobs:
         uses: wearerequired/lint-action@v2
         with:
           dotnet_format: true
-          dotnet_format_workspace: './o-backend.sln'
