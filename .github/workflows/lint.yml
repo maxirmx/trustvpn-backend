@@ -45,4 +45,4 @@ jobs:
         uses: wearerequired/lint-action@v2
         with:
           dotnet_format: true
-           dotnet_format_workspace: './o-backend.sln'
+          dotnet_format_workspace: './o-backend.sln'
