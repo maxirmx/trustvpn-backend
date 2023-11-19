@@ -48,12 +48,6 @@ public class User
     [Column("password")]
     public required string Password { get; set; }
 
-    [Column("api_key")]
-    public required string ApiKey { get; set; }
-
-    [Column("api_secret")]
-    public required string ApiSecret { get; set; }
-
     [Column("is_admin")]
     public required bool IsAdmin { get; set; }
 
@@ -71,7 +65,6 @@ public class UserViewItem
         LastName = user.LastName;
         Patronimic = user.Patronimic;
         Email = user.Email;
-        ApiKey = user.ApiKey;
         IsAdmin = user.IsAdmin;
         ProfileId = user.ProfileId;
     }
@@ -81,9 +74,8 @@ public class UserViewItem
     public string LastName { get; set; } = "";
     public string Patronimic { get; set; } = "";
     public string Email { get; set; } = "";
-    public string ApiKey { get; set; }  = "";
     public bool IsAdmin { get; set; } = false;
-    public int ProfileId { get; set; } = 0;
+    public int ProfileId { get; set; } = 1;
 }
 
 public class UserViewItemWithJWT :  UserViewItem
@@ -102,8 +94,6 @@ public class UserUpdateItem
     public string Patronimic { get; set; } = "";
     public required string Email { get; set; }
     public string? Password { get; set; }
-    public required string ApiKey { get; set; }
-    public string? ApiSecret { get; set; }
     public bool IsAdmin { get; set; }
     public int ProfileId { get; set; }
 }

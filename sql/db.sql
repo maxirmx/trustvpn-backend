@@ -1,19 +1,21 @@
 --
--- docker exec -it db psql -U postgres
+-- docker exec -it o-db psql -U postgres
 --
 
 START TRANSACTION;
 
+DROP TABLE IF EXISTS "users";
 DROP TABLE IF EXISTS "profiles";
+DROP TABLE IF EXISTS "versions";
 
 CREATE TABLE "profiles" (
   "id"              SERIAL PRIMARY KEY,
-  "name"            VARCHAR(16) NOT NULL
+  "name"            VARCHAR(64) NOT NULL
 );
 
-INSERT INTO "profiles" ("name") VALUES ("Блокировка");
-
-DROP TABLE IF EXISTS "users";
+INSERT INTO "profiles" ("name") VALUES ('Блокировка');
+INSERT INTO "profiles" ("name") VALUES ('Ограниченный траффик');
+INSERT INTO "profiles" ("name") VALUES ('Неoграниченный траффик');
 
 CREATE TABLE "users" (
   "id"              SERIAL PRIMARY KEY,
@@ -22,19 +24,18 @@ CREATE TABLE "users" (
   "patronimic"      VARCHAR(16) NOT NULL,
   "email"           VARCHAR(64) NOT NULL,
   "password"        VARCHAR(64) NOT NULL,
-  "api_key"         VARCHAR(64) NOT NULL,
-  "api_secret"      VARCHAR(64) NOT NULL,
   "is_admin"        BOOLEAN NOT NULL DEFAULT FALSE,
-  "profile_id"      INTEGER NOT NULL DEFAULT 0 REFERENCES "profiles" ("id") ON DELETE RESTRICT,
-
+  "profile_id"      INTEGER NOT NULL DEFAULT 0 REFERENCES "profiles" ("id") ON DELETE RESTRICT
 );
 
 CREATE UNIQUE INDEX "idx_users_email" ON "users" ("email");
 
-INSERT INTO "users" ("first_name", "patronimic", "last_name", "email", "password", "api_key", "api_secret", "is_admin") VALUES
-('Максим', 'Станиславович', 'Самсонов', 'maxirmx@sw.consulting', '$2a$11$PUWwhEUzqrusmtrDsH4wguSDVx1kmGcksoU1rOKjAcWkGKdGA55ZK', '', '', TRUE, 0);
-
-DROP TABLE IF EXISTS "versions";
+--
+-- password: 12345
+-- Change immediately !!!
+--\q
+INSERT INTO "users" ("first_name", "patronimic", "last_name", "email", "password", "is_admin", "profile_id") VALUES
+('Максим', 'Станиславович', 'Самсонов', 'maxirmx@sw.consulting', '$2a$11$k44i2k4/0sCdFnVqsll0QeTusjJjbAVwbT19gsfjLJRCA5ocbBnVu', TRUE, 1);
 
 CREATE TABLE "versions" (
   "id"      SERIAL PRIMARY KEY,

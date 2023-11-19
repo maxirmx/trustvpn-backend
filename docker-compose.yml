@@ -2,8 +2,8 @@
 # This file is a part of O!Service
 
 # docker compose build
-#   docker exec -it db psql -U postgres
-# docker compose up o_backend
+#   docker exec -it o-db psql -U postgres
+# docker compose up o-backend
 
 version: '1'
 services:
@@ -18,7 +18,7 @@ services:
     depends_on:
       - o-db
     environment:
-      ConnectionStrings__DefaultConnection: "Host=db;Database=postgres;Username=postgres;Password=postgres"
+      ConnectionStrings__DefaultConnection: "Host=o-db;Database=postgres;Username=postgres;Password=postgres"
   o-db:
     container_name: o-db
     image: postgres:12

@@ -25,13 +25,13 @@
 name: Lint
 
 on:
-  push:
-    branches: [ main ]
-    paths-ignore:
-      - '**.adoc'
-      - '**.md'
-    tags:     [ 'v*' ]
-  pull_request:
+#  push:
+#    branches: [ main ]
+#    paths-ignore:
+#      - '**.adoc'
+#      - '**.md'
+#    tags:     [ 'v*' ]
+#  pull_request:
   workflow_dispatch:
 
 concurrency:

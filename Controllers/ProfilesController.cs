@@ -35,10 +35,10 @@ namespace o_service_api.Controllers;
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
-public class ProfileController : OControllerBase
+public class ProfilesController : OControllerBase
 {
   private readonly ProfileContext profileContext;
-  public ProfileController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext prContext): base(httpContextAccessor, uContext)
+  public ProfilesController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext prContext): base(httpContextAccessor, uContext)
   {
     profileContext = prContext;
   }

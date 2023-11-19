@@ -98,12 +98,10 @@ public class UsersController : OControllerBase
     user.LastName = update.LastName;
     user.Patronimic = update.Patronimic;
     user.Email = update.Email;
-    user.ApiKey = update.ApiKey;
     user.IsAdmin = update.IsAdmin;
     user.ProfileId = update.ProfileId;
 
     if (update.Password != null) user.Password = update.Password;
-    if (update.ApiSecret != null) user.ApiSecret = update.ApiSecret;
 
     userContext.Entry(user).State = EntityState.Modified;
 

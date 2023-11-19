@@ -55,8 +55,12 @@ public class AuthController : ControllerBase
     User? user = await _context.Users.Where(u => u.Email == crd.Email).SingleOrDefaultAsync();
 
     if (user == null) return Unauthorized(new {message = "Неправильный адрес электронной почты или пароль" });
-    if (!BCrypt.Net.BCrypt.Verify(crd.Password, user.Password)) return Unauthorized();
 
+    string hashToStoreInDb = BCrypt.Net.BCrypt.HashPassword(crd.Password);
+    Console.WriteLine(hashToStoreInDb);
+
+
+    if (!BCrypt.Net.BCrypt.Verify(crd.Password, user.Password)) return Unauthorized();
     UserViewItemWithJWT userViewItem = new(user) {
       Token = _jwtUtils.GenerateJwtToken(user)
     };
