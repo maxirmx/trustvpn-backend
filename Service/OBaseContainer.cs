@@ -60,15 +60,17 @@ public class OBaseContainer
         return _containerId;
     }
 
-    public async Task<string?> RunInContainer(string[] args)
+    public async Task<string?> RunInContainer(string cmd)
     {
         string? output = null;
-        string? stderr = null;
+        string? stderr;
 
         if (_containerId == null) await GetContainerId();
         if (_containerId == null) return output;
 
-        string[] command = new string[] { "/bin/bash", "-c" }.Concat(args).ToArray();
+        string[] command = new string[] { "/bin/bash", "-c" }.Concat(new string[] { cmd }).ToArray();
+
+        Console.WriteLine($"Executing command {cmd} in {_containerName}");
 
         try {
             var dockerClient = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
@@ -87,8 +89,7 @@ public class OBaseContainer
 
             if (execInspectResponse.ExitCode != 0) {
                 Console.WriteLine($"Command {command} in {_containerName} exited with code {execInspectResponse.ExitCode}");
-                Console.WriteLine($"Output was {stderr}");
-                output = null;
+                output = stderr;
             }
         }
         catch (Exception e) {

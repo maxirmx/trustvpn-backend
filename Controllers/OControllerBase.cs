@@ -31,6 +31,8 @@ namespace o_service_api.Controllers;
 public class OControllerBase : ControllerBase
 {
   protected readonly UserContext userContext;
+  protected readonly ProfileContext profileContext;
+
   protected readonly int curUserId;
 
   protected ObjectResult _403()
@@ -46,16 +48,22 @@ public class OControllerBase : ControllerBase
   protected ObjectResult _404Profile(int id)
   {
     return StatusCode(StatusCodes.Status404NotFound,
-                      new { message = $"Не удалось найти ghjabkm [profile id={id}]." });
+                      new { message = $"Не удалось найти профиль [profile id={id}]." });
   }
   protected ObjectResult _409Email(string email)
   {
     return StatusCode(StatusCodes.Status409Conflict,
                       new { message = $"Пользователь с таким адресом электронной почты уже зарегистрирован [email = {email}]." });
   }
-  protected OControllerBase(IHttpContextAccessor httpContextAccessor, UserContext uContext)
+  protected ObjectResult _418IAmATeaPot()
+  {
+    return StatusCode(StatusCodes.Status418ImATeapot, new { message = "Ошибка O!Service" });
+  }
+
+  protected OControllerBase(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext)
   {
     userContext = uContext;
+    profileContext = pContext;
     curUserId = 0;
     var htc = httpContextAccessor.HttpContext;
     if (htc != null) {

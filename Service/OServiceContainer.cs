@@ -32,28 +32,21 @@ namespace o_service_api.Service;
 
 public class OServiceContainer : OBaseContainer
 {
-    public OServiceContainer() : base("o-db")
+    public OServiceContainer() : base("o-container")
     {
     }
-
     public Task<string?> CreateUser(string userName, string userProfile)
     {
-        return RunInContainer(new string[] { "ls", "-l" });
-//        return RunInContainer($"create-user {userName} {userProfile}");
-    }
-
-    public Task<string?> ChangeUserProfile(string userName, string userProfile)
-    {
-        return RunInContainer(new string[] { "ls", "-l" });
+        return RunInContainer($"o-client-create {userName} {userProfile}");
     }
 
     public Task<string?> RemoveUser(string userName)
     {
-        return RunInContainer(new string[] { "ls", "-l" });
+        return RunInContainer($"o-client-remove {userName}");
     }
 
-    public Task<string?> GetConfigFull(string userName)
+    public Task<string?> GetUserConfig(string userName)
     {
-        return RunInContainer(new string[] { "ls", "-l" });
+        return RunInContainer($"o-client-get {userName}");
     }
 }

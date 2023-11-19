@@ -39,5 +39,4 @@ public class ProfileContext : DbContext
     {
         return Profiles.Any(e => e.Id == id);
     }
-
 }
