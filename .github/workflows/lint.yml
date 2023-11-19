@@ -59,3 +59,4 @@ jobs:
         with:
           dotnet_format: true
           auto_fix: true
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
