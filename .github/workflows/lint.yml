@@ -58,7 +58,7 @@ jobs:
         run: dotnet tool install -g dotnet-format
 
       - name: Run dotnet-format
-        run: dotnet-format --check --fix
+        run: dotnet-format --check --fix-style
 
       - name: Commit changes
         run: |
