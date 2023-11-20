@@ -145,7 +145,7 @@ public class UsersController : OControllerBase
     user.IsAdmin = update.IsAdmin;
     user.ProfileId = update.ProfileId;
 
-    if (update.Password != null) user.Password = update.Password;
+    if (update.Password != null) user.Password =  BCrypt.Net.BCrypt.HashPassword(update.Password);;
 
     userContext.Entry(user).State = EntityState.Modified;
 
