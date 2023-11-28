@@ -1,6 +1,6 @@
 // Copyright (C) 2023 Maxim [maxirmx] Samsonov (www.sw.consulting)
 // All rights reserved.
-// This file is a part of O!Service applcation
+// This file is a part of TrustVPN applcation
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions
@@ -57,7 +57,7 @@ public class OControllerBase : ControllerBase
   }
   protected ObjectResult _418IAmATeaPot()
   {
-    return StatusCode(StatusCodes.Status418ImATeapot, new { message = "Ошибка O!Service" });
+    return StatusCode(StatusCodes.Status418ImATeapot, new { message = "Ошибка TrustVPN" });
   }
 
   protected OControllerBase(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext)

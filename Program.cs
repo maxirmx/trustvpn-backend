@@ -1,6 +1,6 @@
 // Copyright (C) 2023 Maxim [maxirmx] Samsonov (www.sw.consulting)
 // All rights reserved.
-// This file is a part of O!Service applcation
+// This file is a part of TrustVPN applcation
 // Adopted from:
 // https://dev.to/francescoxx/c-c-sharp-crud-rest-api-using-net-7-aspnet-entity-framework-postgres-docker-and-docker-compose-493a
 //

@@ -1,5 +1,5 @@
 # Copyright (c) 2023 Maxim [maxirmx] Samsonov (https://sw.consulting)
-# This file is a part of O!Service
+# This file is a part of TrustVPN
 
 # docker compose build
 #   docker exec -it o-db psql -U postgres
@@ -13,8 +13,8 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:80"
-      - "443:443"
+      - "8081:80"
+      - "1443:443"
     depends_on:
       - o-db
       - o-container
@@ -29,8 +29,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
-    ports:
-      - "5432:5432"
+#    ports:
+#      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
