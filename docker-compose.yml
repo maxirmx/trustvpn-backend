@@ -5,7 +5,7 @@
 #   docker exec -it o-db psql -U postgres
 # docker compose up o-backend
 
-version: '1'
+version: '3'
 services:
   o-backend:
     container_name: o-backend
