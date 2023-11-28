@@ -1,3 +1,3 @@
 # o-backend
 
-O!Service backend server
+TrustVPN backend server

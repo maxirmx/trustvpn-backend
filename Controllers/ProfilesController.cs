@@ -1,6 +1,6 @@
 // Copyright (C) 2023 Maxim [maxirmx] Samsonov (www.sw.consulting)
 // All rights reserved.
-// This file is a part of O!Service applcation
+// This file is a part of TrustVPN applcation
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions
@@ -37,7 +37,7 @@ namespace o_service_api.Controllers;
 [Route("api/[controller]")]
 public class ProfilesController : OControllerBase
 {
-  public ProfilesController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext): 
+  public ProfilesController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext):
          base(httpContextAccessor, uContext, pContext)
   {
   }

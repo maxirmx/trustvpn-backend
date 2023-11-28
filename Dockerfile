@@ -1,5 +1,5 @@
 # Copyright (c) 2023 Maxim [maxirmx] Samsonov (https://sw.consulting)
-# This file is a part of O!Service
+# This file is a part of TrustVPN
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
