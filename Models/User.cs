@@ -34,10 +34,10 @@ public class User
     public int Id { get; set; }
 
     [Column("first_name")]
-    public required string FirstName { get; set; }
+    public string FirstName { get; set; } = "";
 
     [Column("last_name")]
-    public required string LastName { get; set; }
+    public string LastName { get; set; } = "";
 
     [Column("patronimic")]
     public string Patronimic { get; set; } = "";
@@ -90,11 +90,11 @@ public class UserViewItemWithJWT :  UserViewItem
 
 public class UserUpdateItem
 {
-    public required string FirstName { get; set; }
-    public required string LastName { get; set; }
-    public string Patronimic { get; set; } = "";
-    public required string Email { get; set; }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public string? Patronimic { get; set; }
+    public string? Email { get; set; }
     public string? Password { get; set; }
-    public bool IsAdmin { get; set; }
-    public int ProfileId { get; set; }
+    public bool? IsAdmin { get; set; }
+    public int? ProfileId { get; set; }
 }

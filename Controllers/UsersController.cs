@@ -117,34 +117,36 @@ public class UsersController : OControllerBase
                          await userContext.CheckAdminOrSameUser(id, curUserId);
     if (ch == null ||!ch.Value)  return _403();
 
-    Profile? profile = await profileContext.Profiles.FindAsync(update.ProfileId);
-    if (profile == null) {
-      return _404Profile(update.ProfileId);
-    }
-
-    if (user.Email != update.Email && userContext.Exists(update.Email)) return _409Email(update.Email);
-    var oContainer = new OServiceContainer();
-
-    if (user.Email != update.Email || user.ProfileId != update.ProfileId) {
-      if (user.ProfileId != Profile.NoProfile) {
-        if (await oContainer.RemoveUser(user.Email) == null) {
-          return _418IAmATeaPot();
-        }
+    if (update.ProfileId != null) {
+      user.ProfileId = (int)update.ProfileId;
+      var newEmail = update.Email ?? user.Email;
+      Profile? profile = await profileContext.Profiles.FindAsync(update.ProfileId);
+      if (profile == null) {
+        return _404Profile((int)update.ProfileId);
       }
-      if (update.ProfileId != Profile.NoProfile) {
-        if (await oContainer.CreateUser(update.Email, profile.Prfile) == null) {
+
+      if (user.Email != newEmail && userContext.Exists(newEmail)) return _409Email(newEmail);
+      var oContainer = new OServiceContainer();
+
+      if (user.Email != newEmail || user.ProfileId != update.ProfileId) {
+        if (user.ProfileId != Profile.NoProfile) {
+          if (await oContainer.RemoveUser(user.Email) == null) {
             return _418IAmATeaPot();
+          }
+        }
+        if (update.ProfileId != Profile.NoProfile) {
+          if (await oContainer.CreateUser(newEmail, profile.Prfile) == null) {
+            return _418IAmATeaPot();
+          }
         }
       }
     }
 
-    user.FirstName = update.FirstName;
-    user.LastName = update.LastName;
-    user.Patronimic = update.Patronimic;
-    user.Email = update.Email;
-    user.IsAdmin = update.IsAdmin;
-    user.ProfileId = update.ProfileId;
-
+    if (update.Email != null)  user.Email = update.Email;
+    if (update.FirstName != null) user.FirstName = update.FirstName;
+    if (update.LastName != null) user.LastName = update.LastName;
+    if (update.Patronimic != null) user.Patronimic = update.Patronimic;
+    if (update.IsAdmin != null) user.IsAdmin = (bool)update.IsAdmin;
     if (update.Password != null) user.Password =  BCrypt.Net.BCrypt.HashPassword(update.Password);;
 
     userContext.Entry(user).State = EntityState.Modified;
