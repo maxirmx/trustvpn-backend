@@ -73,5 +73,8 @@ jobs:
       - name: Setup Newman
         run: npm install -g newman
 
+      - name: Initialize database
+        run:  docker exec -i trustvpn-db psql -U postgres < sql/db.sql
+
       - name: Stop the application
         run: docker compose down
