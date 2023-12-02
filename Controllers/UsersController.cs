@@ -62,13 +62,8 @@ public class UsersController : TrustVpnControllerBase
     var user = await userContext.UserViewItem(id);
     if (user == null) return _404User(id);
 
-    if (user.ProfileId != Profile.NoProfile) {
-      var oContainer = new TrustVpnServiceContainer();
-      var output = await oContainer.GetUserConfig(user.Email);
-      if (output != null) {
-        user.Config = output;
-      }
-    }
+    var oContainer = new TrustVpnServiceContainer();
+    user.Config = await oContainer.GetUserConfig(user.Email) ?? "";
     return user;
   }
 
@@ -86,16 +81,14 @@ public class UsersController : TrustVpnControllerBase
 
     userContext.Users.Add(user);
 
-    if (user.ProfileId != Profile.NoProfile) {
-      Profile? profile = await profileContext.Profiles.FindAsync(user.ProfileId);
-      if (profile == null) {
-        return _404Profile(user.ProfileId);
-      }
+    Profile? profile = await profileContext.Profiles.FindAsync(user.ProfileId);
+    if (profile == null) {
+      return _404Profile(user.ProfileId);
+    }
 
-      string? output = await new TrustVpnServiceContainer().CreateUser(user.Email, profile.Prfile);
-      if (output == null) {
-        return _418IAmATeaPot();
-      }
+    string? output = await new TrustVpnServiceContainer().CreateUser(user.Email, profile.Prfile);
+    if (output == null) {
+      return _418IAmATeaPot();
     }
 
     await userContext.SaveChangesAsync();
@@ -117,32 +110,44 @@ public class UsersController : TrustVpnControllerBase
                          await userContext.CheckAdminOrSameUser(id, curUserId);
     if (ch == null ||!ch.Value)  return _403();
 
-    if (update.ProfileId != null) {
-      user.ProfileId = (int)update.ProfileId;
-      var newEmail = update.Email ?? user.Email;
-      Profile? profile = await profileContext.Profiles.FindAsync(update.ProfileId);
+    var crtProfile = user.ProfileId;
+    Profile? profile = null;
+    if (update.ProfileId != null && user.ProfileId != (int)update.ProfileId) {
+      crtProfile = (int)update.ProfileId;
+      profile = await profileContext.Profiles.FindAsync(crtProfile);
       if (profile == null) {
-        return _404Profile((int)update.ProfileId);
-      }
-
-      if (user.Email != newEmail && userContext.Exists(newEmail)) return _409Email(newEmail);
-      var oContainer = new TrustVpnServiceContainer();
-
-      if (user.Email != newEmail || user.ProfileId != update.ProfileId) {
-        if (user.ProfileId != Profile.NoProfile) {
-          if (await oContainer.RemoveUser(user.Email) == null) {
-            return _418IAmATeaPot();
-          }
-        }
-        if (update.ProfileId != Profile.NoProfile) {
-          if (await oContainer.CreateUser(newEmail, profile.Prfile) == null) {
-            return _418IAmATeaPot();
-          }
-        }
+        return _404Profile(crtProfile);
       }
     }
 
-    if (update.Email != null)  user.Email = update.Email;
+    if (update.Email != null && user.Email != update.Email) {
+      if (userContext.Exists(update.Email)) return _409Email(update.Email);
+
+      if (profile == null) {
+        profile = await profileContext.Profiles.FindAsync(crtProfile);
+        if (profile == null) {
+          return _404Profile(crtProfile);
+        }
+      }
+
+      var oContainer = new TrustVpnServiceContainer();
+      if (await oContainer.RemoveUser(user.Email) == null) {
+        return _418IAmATeaPot();
+      }
+      if (await oContainer.CreateUser(update.Email, profile.Prfile) == null) {
+        return _418IAmATeaPot();
+      }
+
+      user.Email = update.Email;
+    }
+    else if (update.ProfileId != null && user.ProfileId != (int)update.ProfileId) {
+      var oContainer = new TrustVpnServiceContainer();
+      if (await oContainer.ModifyUser(user.Email, profile.Prfile) == null) {
+        return _418IAmATeaPot();
+      }
+      user.ProfileId = (int)update.ProfileId;
+    }
+
     if (update.FirstName != null) user.FirstName = update.FirstName;
     if (update.LastName != null) user.LastName = update.LastName;
     if (update.Patronimic != null) user.Patronimic = update.Patronimic;

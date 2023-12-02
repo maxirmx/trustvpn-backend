@@ -14,7 +14,8 @@ CREATE TABLE "profiles" (
   "profile"         VARCHAR(64) NOT NULL
 );
 
-INSERT INTO "profiles" ("name", "profile") VALUES ('Блокировка', 'none');
+-- 'blocked' - зарезервированное значение. Не менять, не удалять, должно быть на первой позиции (id=1).
+INSERT INTO "profiles" ("name", "profile") VALUES ('Блокировка', 'blocked');
 INSERT INTO "profiles" ("name", "profile") VALUES ('Ограниченный траффик', 'limited');
 INSERT INTO "profiles" ("name", "profile") VALUES ('Неoграниченный траффик', 'unlimited');
 
@@ -43,6 +44,7 @@ CREATE TABLE "versions" (
 
 CREATE UNIQUE INDEX "idx_versions_version" ON "versions" ("version");
 
+-- Всё, что было до версии 0.1.3 не имеет даже исторической ценности :)
 INSERT INTO "versions" ("version", "date") VALUES ('0.1.3', '2023-12-02');
 
 COMMIT;
