@@ -57,25 +57,21 @@ jobs:
     permissions:
       contents: read
       packages: write
-    services:
-      trustvpn-db:
-        image: postgres:12
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-        options: >-
-          --health-cmd "pg_isready -U postgres"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-          -v pgdata:/var/lib/postgresql/data
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 16
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install Newman
+      - name: Start the application
+        run: docker compose up -d
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup Newman
         run: npm install -g newman
+
+      - name: Stop the application
+        run: docker compose down
