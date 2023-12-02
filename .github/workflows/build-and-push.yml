@@ -44,7 +44,19 @@ jobs:
     permissions:
       contents: read
       packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
+      - name: Docker compose
+        run: docker compose build
+
+  test:
+    needs: build-containers
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     services:
       trustvpn-db:
         image: postgres:12
@@ -59,29 +71,6 @@ jobs:
           --health-retries 5
           -v pgdata:/var/lib/postgresql/data
 
-      trustvpn-container:
-        image: ghcr.io/maxirmx/trustvpn-container:latest
-        options: >-
-          --name trustvpn-container
-          -v ovpndata:/etc/openvpn
-          --cap-add NET_ADMIN
-          --sysctl net.ipv6.conf.all.disable_ipv6=0
-          --sysctl net.ipv6.conf.all.forwarding=1
-          /bin/bash -c "trustvpn-container-if-start -u localhost"
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Docker compose
-        run: docker compose build
-
-  test:
-    needs: build-containers
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
