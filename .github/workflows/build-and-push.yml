@@ -61,13 +61,13 @@ jobs:
 
       trustvpn-container:
         image: ghcr.io/maxirmx/trustvpn-container:latest
-        command: ["trustvpn-container-if-start", "-u", "localhost"]
         options: >-
           --name trustvpn-container
           -v ovpndata:/etc/openvpn
           --cap-add NET_ADMIN
           --sysctl net.ipv6.conf.all.disable_ipv6=0
           --sysctl net.ipv6.conf.all.forwarding=1
+          /bin/bash -c "trustvpn-container-if-start -u localhost"
 
     steps:
       - name: Checkout
