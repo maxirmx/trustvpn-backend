@@ -26,8 +26,8 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 
-using o_service_api.Authorization;
-using o_service_api.Data;
+using TrustVpn.Authorization;
+using TrustVpn.Data;
 
 using Microsoft.EntityFrameworkCore;
 

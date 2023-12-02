@@ -2,14 +2,14 @@
 # This file is a part of TrustVPN
 
 # docker compose build
-#   docker exec -it o-db psql -U postgres
-# docker compose up o-backend
+#   docker exec -it trustvpn-db psql -U postgres
+# docker compose up trustvpn-backend
 
 version: '3'
 services:
-  o-backend:
-    container_name: o-backend
-    image: o-backend
+  trustvpn-backend:
+    container_name: trustvpn-backend
+    image: trustvpn-backend
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,14 +17,14 @@ services:
       - "8081:80"
       - "1443:443"
     depends_on:
-      - o-db
-      - o-container
+      - trustvpn-db
+      - trustvpn-container
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      ConnectionStrings__DefaultConnection: "Host=o-db;Database=postgres;Username=postgres;Password=postgres"
-  o-db:
-    container_name: o-db
+      ConnectionStrings__DefaultConnection: "Host=trustvpn-db;Database=postgres;Username=postgres;Password=postgres"
+  trustvpn-db:
+    container_name: trustvpn-db
     image: postgres:12
     environment:
       - POSTGRES_USER=postgres
@@ -35,9 +35,10 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  o-container:
-    container_name: o-container
-    image: ghcr.io/maxirmx/o-container:latest
+  trustvpn-container:
+    container_name: trustvpn-container
+    image: ghcr.io/maxirmx/trustvpn-container:latest
+    command: ["trustvpn-container-if-start", "-u", "localhost"]
     ports:
       - "1194:1194/udp"
     cap_add:
@@ -45,6 +46,9 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
       - net.ipv6.conf.all.forwarding=1
+    volumes:
+      - ovpndata:/etc/openvpn
 
 volumes:
   pgdata: {}
+  ovpndata: {}

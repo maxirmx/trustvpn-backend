@@ -23,19 +23,19 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-using o_service_api.Authorization;
-using o_service_api.Data;
-using o_service_api.Models;
+using TrustVpn.Authorization;
+using TrustVpn.Data;
+using TrustVpn.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using o_service_api.Service;
+using TrustVpn.Service;
 
-namespace o_service_api.Controllers;
+namespace TrustVpn.Controllers;
 
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
-public class UsersController : OControllerBase
+public class UsersController : TrustVpnControllerBase
 {
   public UsersController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext) :
          base(httpContextAccessor, uContext, pContext)
@@ -63,7 +63,7 @@ public class UsersController : OControllerBase
     if (user == null) return _404User(id);
 
     if (user.ProfileId != Profile.NoProfile) {
-      var oContainer = new OServiceContainer();
+      var oContainer = new TrustVpnServiceContainer();
       var output = await oContainer.GetUserConfig(user.Email);
       if (output != null) {
         user.Config = output;
@@ -92,7 +92,7 @@ public class UsersController : OControllerBase
         return _404Profile(user.ProfileId);
       }
 
-      string? output = await new OServiceContainer().CreateUser(user.Email, profile.Prfile);
+      string? output = await new TrustVpnServiceContainer().CreateUser(user.Email, profile.Prfile);
       if (output == null) {
         return _418IAmATeaPot();
       }
@@ -126,7 +126,7 @@ public class UsersController : OControllerBase
       }
 
       if (user.Email != newEmail && userContext.Exists(newEmail)) return _409Email(newEmail);
-      var oContainer = new OServiceContainer();
+      var oContainer = new TrustVpnServiceContainer();
 
       if (user.Email != newEmail || user.ProfileId != update.ProfileId) {
         if (user.ProfileId != Profile.NoProfile) {
@@ -165,7 +165,7 @@ public class UsersController : OControllerBase
     var user = await userContext.Users.FindAsync(id);
     if (user == null) return _404User(id);
 
-    OServiceContainer container = new();
+    TrustVpnServiceContainer container = new();
     string? output = await container.RemoveUser(user.Email);
 
     if (output == null) {

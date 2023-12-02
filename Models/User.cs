@@ -25,7 +25,7 @@
 
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace o_service_api.Models;
+namespace TrustVpn.Models;
 
 [Table("users")]
 public class User

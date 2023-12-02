@@ -23,19 +23,17 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-using System.IO;
-using System.Text;
 using Docker.DotNet;
 using Docker.DotNet.Models;
 
-namespace o_service_api.Service;
+namespace TrustVpn.Service;
 
-public class OBaseContainer
+public class TrustVpnBaseContainer
 {
-    private string _containerName;
+    private readonly string _containerName;
     private string? _containerId;
 
-    public OBaseContainer(string containerName)
+    public TrustVpnBaseContainer(string containerName)
     {
         _containerName = containerName;
     }

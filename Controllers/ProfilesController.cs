@@ -23,19 +23,19 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-using o_service_api.Authorization;
-using o_service_api.Data;
-using o_service_api.Models;
+using TrustVpn.Authorization;
+using TrustVpn.Data;
+using TrustVpn.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace o_service_api.Controllers;
+namespace TrustVpn.Controllers;
 
 
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
-public class ProfilesController : OControllerBase
+public class ProfilesController : TrustVpnControllerBase
 {
   public ProfilesController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext):
          base(httpContextAccessor, uContext, pContext)

@@ -25,14 +25,13 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BCrypt.Net;
 
-using o_service_api.Authorization;
-using o_service_api.Data;
-using o_service_api.Models;
-using o_service_api.Service;
+using TrustVpn.Authorization;
+using TrustVpn.Data;
+using TrustVpn.Models;
+using TrustVpn.Service;
 
-namespace o_service_api.Controllers;
+namespace TrustVpn.Controllers;
 
 [ApiController]
 [Authorize]
@@ -77,16 +76,16 @@ public class AuthController : ControllerBase
   [AllowAnonymous]
   public async Task<ActionResult<Status>> Status()
   {
-    OBaseContainer oContainer = new("o-container");
+    TrustVpnBaseContainer oContainer = new("trustvpn-container");
     string? serviceContainerId = await oContainer.GetContainerId();
 
-    oContainer = new("o-db");
+    oContainer = new("trustvpn-db");
     string? dbContainerId = await oContainer.GetContainerId();
 
     var status = new Status(serviceContainerId, dbContainerId) {
       Message = "Hello, world!",
-      ServiceContainerId = serviceContainerId == null ? "not found" : serviceContainerId,
-      DBContainerId = dbContainerId == null ? "not found" : dbContainerId
+      ServiceContainerId = serviceContainerId ?? "not found",
+      DBContainerId = dbContainerId ?? "not found"
     };
 
     return Ok(status);

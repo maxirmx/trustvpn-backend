@@ -1,5 +1,5 @@
 --
--- docker exec -it o-db psql -U postgres
+-- docker exec -it trustvpn-db psql -U postgres
 --
 
 START TRANSACTION;
@@ -31,12 +31,9 @@ CREATE TABLE "users" (
 
 CREATE UNIQUE INDEX "idx_users_email" ON "users" ("email");
 
---
--- password: 12345
--- Change immediately !!!
---\q
+-- password: Ivanov$123
 INSERT INTO "users" ("first_name", "patronimic", "last_name", "email", "password", "is_admin", "profile_id") VALUES
-('Максим', 'Станиславович', 'Самсонов', 'maxirmx@sw.consulting', '$2a$11$k44i2k4/0sCdFnVqsll0QeTusjJjbAVwbT19gsfjLJRCA5ocbBnVu', TRUE, 1);
+('Иван', 'Иванович', 'Иванов', 'ivanov@example.com', '$2a$11$GAYD9aArfam2L/wxy26r2.gwNSTgaqBN9jZrXsDkc7stvHMYt12XW', TRUE, 1);
 
 CREATE TABLE "versions" (
   "id"      SERIAL PRIMARY KEY,
@@ -44,6 +41,8 @@ CREATE TABLE "versions" (
   "date"    DATE NOT NULL
 );
 
-INSERT INTO "versions" ("version", "date") VALUES ('0.1.0', '2023-12-11');
+CREATE UNIQUE INDEX "idx_versions_version" ON "versions" ("version");
+
+INSERT INTO "versions" ("version", "date") VALUES ('0.1.3', '2023-12-02');
 
 COMMIT;

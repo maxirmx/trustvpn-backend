@@ -1,8 +1,8 @@
-using o_service_api.Models;
+using TrustVpn.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
-namespace o_service_api.Data;
+namespace TrustVpn.Data;
 public class UserContext : DbContext
 {
     public UserContext(DbContextOptions<UserContext> options) : base(options) { }

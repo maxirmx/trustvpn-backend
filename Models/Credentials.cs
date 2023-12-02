@@ -23,7 +23,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-namespace o_service_api.Models;
+namespace TrustVpn.Models;
 public class Credentials
 {
     public required string Email { get; set; }

@@ -23,30 +23,30 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-using System.IO;
-using System.Text;
-using Docker.DotNet;
-using Docker.DotNet.Models;
+namespace TrustVpn.Service;
 
-namespace o_service_api.Service;
-
-public class OServiceContainer : OBaseContainer
+public class TrustVpnServiceContainer : TrustVpnBaseContainer
 {
-    public OServiceContainer() : base("o-container")
+    public TrustVpnServiceContainer() : base("trustvpn-container")
     {
     }
     public Task<string?> CreateUser(string userName, string userProfile)
     {
-        return RunInContainer($"o-client-create {userName} {userProfile}");
+        return RunInContainer($"trustvpn-client-create {userName} {userProfile}");
+    }
+
+    public Task<string?> BlockUser(string userName)
+    {
+        return RunInContainer($"trustvpn-block-create {userName}");
     }
 
     public Task<string?> RemoveUser(string userName)
     {
-        return RunInContainer($"o-client-remove {userName}");
+        return RunInContainer($"trustvpn-client-remove {userName}");
     }
 
     public Task<string?> GetUserConfig(string userName)
     {
-        return RunInContainer($"o-client-get {userName}");
+        return RunInContainer($"trustvpn-client-get {userName}");
     }
 }

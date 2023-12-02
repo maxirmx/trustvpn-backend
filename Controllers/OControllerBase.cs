@@ -23,12 +23,12 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-using o_service_api.Data;
+using TrustVpn.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace o_service_api.Controllers;
+namespace TrustVpn.Controllers;
 
-public class OControllerBase : ControllerBase
+public class TrustVpnControllerBase : ControllerBase
 {
   protected readonly UserContext userContext;
   protected readonly ProfileContext profileContext;
@@ -60,7 +60,7 @@ public class OControllerBase : ControllerBase
     return StatusCode(StatusCodes.Status418ImATeapot, new { message = "Ошибка TrustVPN" });
   }
 
-  protected OControllerBase(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext)
+  protected TrustVpnControllerBase(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext)
   {
     userContext = uContext;
     profileContext = pContext;

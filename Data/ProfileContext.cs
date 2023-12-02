@@ -24,9 +24,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 using Microsoft.EntityFrameworkCore;
-using o_service_api.Models;
+using TrustVpn.Models;
 
-namespace o_service_api.Data;
+namespace TrustVpn.Data;
 public class ProfileContext : DbContext
 {
     public ProfileContext(DbContextOptions<ProfileContext> options) : base(options)

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "o-backend", "o-backend.csproj", "{258359AB-9266-4003-9CF0-B45841878427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "trustvpn-backend", "trustvpn-backend.csproj", "{258359AB-9266-4003-9CF0-B45841878427}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

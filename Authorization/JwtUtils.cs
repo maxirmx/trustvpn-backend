@@ -27,10 +27,10 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
-using o_service_api.Models;
+using TrustVpn.Models;
 using Microsoft.Extensions.Options;
 
-namespace o_service_api.Authorization;
+namespace TrustVpn.Authorization;
 public interface IJwtUtils
 {
     public string GenerateJwtToken(User user);
