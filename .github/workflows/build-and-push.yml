@@ -76,5 +76,8 @@ jobs:
       - name: Initialize database
         run:  docker exec -i trustvpn-db psql -U postgres < sql/db.sql
 
+      - name: Run Postman Collection
+        run: newman run tests/postman.json
+
       - name: Stop the application
         run: docker compose down
