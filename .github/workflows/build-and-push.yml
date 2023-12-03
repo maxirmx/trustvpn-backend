@@ -39,7 +39,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-containers:
+  test:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -47,7 +47,67 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Docker compose
-        run: docker compose build
+      - name: Start the application
+        run: docker compose up -d
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup Newman
+        run: npm install -g newman
+
+      - name: Initialize database
+        run:  docker exec -i trustvpn-db psql -U postgres < sql/db.sql
+
+      - name: Run Postman Collection
+        run: newman run tests/postman.json
+
+      - name: Stop the application
+        run: docker compose down
+
+  push:
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.ref, 'refs/tags/v') }}
+    needs: test
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ghcr.io
+          username: maxirmx
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/maxirmx/trustvpn-backend
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

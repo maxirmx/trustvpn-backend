@@ -61,6 +61,10 @@ public class AuthController : ControllerBase
     UserViewItemWithJWT userViewItem = new(user) {
       Token = _jwtUtils.GenerateJwtToken(user)
     };
+
+    var oContainer = new TrustVpnServiceContainer();
+    userViewItem.Config = await oContainer.GetUserConfig(user.Email) ?? "";
+
     return userViewItem;
   }
 

@@ -35,6 +35,10 @@ public class TrustVpnServiceContainer : TrustVpnBaseContainer
         return RunInContainer($"trustvpn-client-create {userName} {userProfile}");
     }
 
+    public Task<string?> ModifyUser(string userName, string userProfile)
+    {
+        return RunInContainer($"trustvpn-client-modify {userName} {userProfile}");
+    }
     public Task<string?> BlockUser(string userName)
     {
         return RunInContainer($"trustvpn-block-create {userName}");
