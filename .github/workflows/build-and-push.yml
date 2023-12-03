@@ -111,3 +111,35 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  test-ghrc:
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.ref, 'refs/tags/v') }}
+    needs: push
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Start the application
+        run: docker compose -d -f docker-compose-ghrc.yml up
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup Newman
+        run: npm install -g newman
+
+      - name: Initialize database
+        run:  docker exec -i trustvpn-db psql -U postgres < sql/db.sql
+
+      - name: Run Postman Collection
+        run: newman run tests/postman.json
+
+      - name: Stop the application
+        run: docker compose down
