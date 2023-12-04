@@ -35,6 +35,9 @@ namespace TrustVpn.Controllers;
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
+[Produces("application/json")]
+[ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrMessage))]
+
 public class ProfilesController : TrustVpnControllerBase
 {
   public ProfilesController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext):
@@ -44,6 +47,7 @@ public class ProfilesController : TrustVpnControllerBase
 
   // GET: api/profiles
   [HttpGet]
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Profile>))]
   public async Task<ActionResult<IEnumerable<Profile>>> GetProfiles()
   {
 
@@ -53,15 +57,19 @@ public class ProfilesController : TrustVpnControllerBase
 
   // GET: api/profiles/5
   [HttpGet("{id}")]
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Profile))]
+  [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrMessage))]
   public async Task<ActionResult<Profile>> GetProfile(int id)
   {
     var profile = await profileContext.Profiles.FindAsync(id);
-    if (profile == null)  return NotFound();
+    if (profile == null)  return _404Profile(id);
     return profile;
   }
 
   // POST: api/profiles/add
   [HttpPost("add")]
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Reference))]
+  [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrMessage))]
   public async Task<ActionResult<Profile>> AddProfile(Profile profile)
   {
     var ch = await userContext.CheckAdmin(curUserId);
@@ -77,9 +85,13 @@ public class ProfilesController : TrustVpnControllerBase
 
   // PUT: api/profiles/5
   [HttpPut("{id}")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrMessage))]
   public async Task<ActionResult<Profile>> UpdateProfile(int id, Profile profile)
   {
-    if (id != profile.Id) return BadRequest();
+    if (id != profile.Id) return _400();
 
     var ch = await userContext.CheckAdmin(curUserId);
     if (ch == null || !ch.Value)  return _403();
@@ -101,6 +113,9 @@ public class ProfilesController : TrustVpnControllerBase
 
   // DELETE: api/profiles/5
   [HttpDelete("{id}")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrMessage))]
   public async Task<IActionResult> DeleteProfile(int id)
   {
     var profile = await profileContext.Profiles.FindAsync(id);

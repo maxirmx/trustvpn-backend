@@ -16,8 +16,8 @@ CREATE TABLE "profiles" (
 
 -- 'blocked' - зарезервированное значение. Не менять, не удалять, должно быть на первой позиции (id=1).
 INSERT INTO "profiles" ("name", "profile") VALUES ('Блокировка', 'blocked');
-INSERT INTO "profiles" ("name", "profile") VALUES ('Ограниченный траффик', 'limited');
-INSERT INTO "profiles" ("name", "profile") VALUES ('Неoграниченный траффик', 'unlimited');
+INSERT INTO "profiles" ("name", "profile") VALUES ('Ограниченный трафик', 'limited');
+INSERT INTO "profiles" ("name", "profile") VALUES ('Неoграниченный трафик', 'unlimited');
 
 CREATE TABLE "users" (
   "id"              SERIAL PRIMARY KEY,
@@ -46,5 +46,6 @@ CREATE UNIQUE INDEX "idx_versions_version" ON "versions" ("version");
 
 -- Всё, что было до версии 0.1.3 не имеет даже исторической ценности :)
 INSERT INTO "versions" ("version", "date") VALUES ('0.1.3', '2023-12-02');
+INSERT INTO "versions" ("version", "date") VALUES ('0.1.4', '2023-12-05');
 
 COMMIT;

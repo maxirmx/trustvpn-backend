@@ -35,6 +35,9 @@ namespace TrustVpn.Controllers;
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
+[Produces("application/json")]
+[ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrMessage))]
+
 public class UsersController : TrustVpnControllerBase
 {
   public UsersController(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext) :
@@ -44,6 +47,8 @@ public class UsersController : TrustVpnControllerBase
 
   // GET: api/users
   [HttpGet]
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserViewItem>))]
+  [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrMessage))]
   public async Task<ActionResult<IEnumerable<UserViewItem>>> GetUsers()
   {
     var ch = await userContext.CheckAdmin(curUserId);
@@ -54,7 +59,10 @@ public class UsersController : TrustVpnControllerBase
 
   // GET: api/users/5
   [HttpGet("{id}")]
-  public async Task<ActionResult<UserViewItem>> GetUser(int id)
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserViewItem))]
+  [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrMessage))]
+public async Task<ActionResult<UserViewItem>> GetUser(int id)
   {
     var ch = await userContext.CheckAdminOrSameUser(id, curUserId);
     if (ch == null ||!ch.Value)  return _403();
@@ -69,7 +77,12 @@ public class UsersController : TrustVpnControllerBase
 
     // POST: api/users
   [HttpPost("add")]
-  public async Task<ActionResult<Reference>> PostUser(User user)
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Reference))]
+  [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status418ImATeapot, Type = typeof(ErrMessage))]
+public async Task<ActionResult<Reference>> PostUser(User user)
   {
     var ch = await userContext.CheckAdmin(curUserId);
     if (ch == null ||!ch.Value)  return _403();
@@ -98,6 +111,10 @@ public class UsersController : TrustVpnControllerBase
 
   // PUT: api/users/5
   [HttpPut("{id}")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status418ImATeapot, Type = typeof(ErrMessage))]
   public async Task<IActionResult> PutUser(int id, UserUpdateItem update)
   {
     var user = await userContext.Users.FindAsync(id);
@@ -162,6 +179,10 @@ public class UsersController : TrustVpnControllerBase
 
   // DELETE: api/users/5
   [HttpDelete("{id}")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrMessage))]
+  [ProducesResponseType(StatusCodes.Status418ImATeapot, Type = typeof(ErrMessage))]
   public async Task<IActionResult> DeleteUser(int id)
   {
     var ch = await userContext.CheckAdmin(curUserId);
