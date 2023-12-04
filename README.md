@@ -1,4 +1,52 @@
 # TrustVPN backend server API
+## Установка
+Приложение поставляется в виде трёх контейнеров докер
+Для развёртывания нкжно использовать файл ```docker-compose-ghrc.yml```  внеся в него две модификации, как указано ниже
+
+```
+version: '3'
+services:
+  trustvpn-backend:
+    container_name: trustvpn-backend
+    image: ghcr.io/maxirmx/trustvpn-backend:latest
+    ports:
+      - "8081:80"                                                  # <------------------  Вместо 8081 необходимо задать порт, на котором будет доступно API
+    depends_on:
+      - trustvpn-db
+      - trustvpn-container
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  trustvpn-db:
+    container_name: trustvpn-db
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  trustvpn-container:
+    container_name: trustvpn-container
+    image: ghcr.io/maxirmx/trustvpn-container:latest
+    command: ["trustvpn-container-if-start", "-u", "localhost"]     # <------------------  Вместо localhost необходимо задать имя хоста или внешний IP адрес сервера, на котором развораяивается решение
+    ports:
+      - "1194:1194/udp"
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv6.conf.all.forwarding=1
+    volumes:
+      - ovpndata:/etc/openvpn
+
+volumes:
+  pgdata: {}
+  ovpndata: {}
+```
+
+
+
 ## Swagger
 После установки документация swagger доступна по адресу <host>:<port>/swagger
 
