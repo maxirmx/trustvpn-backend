@@ -25,6 +25,7 @@
 
 using TrustVpn.Data;
 using Microsoft.AspNetCore.Mvc;
+using TrustVpn.Models;
 
 namespace TrustVpn.Controllers;
 
@@ -35,29 +36,34 @@ public class TrustVpnControllerBase : ControllerBase
 
   protected readonly int curUserId;
 
+  protected ObjectResult _400()
+  {
+    return StatusCode(StatusCodes.Status400BadRequest,
+                      new ErrMessage { Msg = "Нарушена целостность запроса." });
+  }
   protected ObjectResult _403()
   {
     return StatusCode(StatusCodes.Status403Forbidden,
-                      new { message = "Недостаточно прав для выполнения операции." });
+                      new ErrMessage { Msg = "Недостаточно прав для выполнения операции." });
   }
   protected ObjectResult _404User(int id)
   {
     return StatusCode(StatusCodes.Status404NotFound,
-                      new { message = $"Не удалось найти пользователя [id={id}]." });
+                      new ErrMessage { Msg = $"Не удалось найти пользователя [id={id}]." });
   }
   protected ObjectResult _404Profile(int id)
   {
     return StatusCode(StatusCodes.Status404NotFound,
-                      new { message = $"Не удалось найти профиль [profile id={id}]." });
+                      new ErrMessage { Msg = $"Не удалось найти профиль [profile id={id}]." });
   }
   protected ObjectResult _409Email(string email)
   {
     return StatusCode(StatusCodes.Status409Conflict,
-                      new { message = $"Пользователь с таким адресом электронной почты уже зарегистрирован [email = {email}]." });
+                      new ErrMessage { Msg = $"Пользователь с таким адресом электронной почты уже зарегистрирован [email = {email}]." });
   }
   protected ObjectResult _418IAmATeaPot()
   {
-    return StatusCode(StatusCodes.Status418ImATeapot, new { message = "Ошибка TrustVPN" });
+    return StatusCode(StatusCodes.Status418ImATeapot, new ErrMessage { Msg = "Ошибка TrustVPN" });
   }
 
   protected TrustVpnControllerBase(IHttpContextAccessor httpContextAccessor, UserContext uContext, ProfileContext pContext)

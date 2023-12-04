@@ -51,6 +51,9 @@ public class AuthController : ControllerBase
   // POST: api/auth/login
   [AllowAnonymous]
   [HttpPost("login")]
+  [Produces("application/json")]
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserViewItemWithJWT))]
+  [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrMessage))]
   public async Task<ActionResult<UserViewItem>> Login(Credentials crd)
   {
     User? user = await _context.Users.Where(u => u.Email == crd.Email).SingleOrDefaultAsync();
@@ -69,15 +72,22 @@ public class AuthController : ControllerBase
   }
 
   // GET: api/auth/check
+  // Checks authorization status
   [HttpGet("check")]
+  [Produces("application/json")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrMessage))]
   public IActionResult Check()
   {
     return NoContent();
   }
 
-  // dummy method to test the connection
+  // GET: api/auth/status
+  // Checks service status
   [HttpGet("status")]
   [AllowAnonymous]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [Produces("application/json", Type = typeof(Status))]
   public async Task<ActionResult<Status>> Status()
   {
     TrustVpnBaseContainer oContainer = new("trustvpn-container");

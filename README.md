@@ -1,9 +1,12 @@
 # TrustVPN backend server API
+## Swagger
+После установки документация swagger доступна по адресу <host>:<port>/swagger
+
 ## Пример использования
 ### Захожу администратором
 
 ```
-POST https://kreel0.samsonov.net:1443/auth/login
+POST <host>:<port>/api/auth/login
 {
    "Password": "... посылал отдельно ...",
    "Email": "ivanov@example.com"
@@ -27,7 +30,7 @@ POST https://kreel0.samsonov.net:1443/auth/login
 
 ### Создаю пользователя
 ```
-POST https://kreel0.samsonov.net:1443/user/add
+POST <host>:<port>/api/user/add
 {
     "FirstName": "Роман",
     "LastName": "Ойра-Ойра",
@@ -53,7 +56,7 @@ POST https://kreel0.samsonov.net:1443/user/add
 
 ### Получаю конфигурацию пользователя
 ```
-GET https://kreel0.samsonov.net:1443/user/12
+GET <host>:<port>/api//user/12
 ```
 Ответ:
 ```
@@ -73,7 +76,7 @@ Eсли поле config пустое, значит пользователь за
 
 ### Меняю профиль пользователя
 ```
-PUT https://kreel0.samsonov.net:1443/user/12
+PUT <host>:<port>/api//user/12
 {
      "ProfileId": 3
 }
