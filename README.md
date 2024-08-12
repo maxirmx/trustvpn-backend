@@ -1,7 +1,7 @@
 # TrustVPN backend server API
 ## Установка
-Приложение поставляется в виде трёх контейнеров докер
-Для развёртывания нкжно использовать файл ```docker-compose-ghrc.yml```  внеся в него две модификации, как указано ниже
+Приложение поставляется в виде трёх контейнеров докер.
+Для развёртывания нужно использовать файл ```docker-compose-ghrc.yml```  внеся в него две модификации, как указано ниже
 
 ```
 version: '3'
@@ -29,7 +29,7 @@ services:
   trustvpn-container:
     container_name: trustvpn-container
     image: ghcr.io/maxirmx/trustvpn-container:latest
-    command: ["trustvpn-container-if-start", "-u", "localhost"]     # <------------------  Вместо localhost необходимо задать имя хоста или внешний IP адрес сервера, на котором развораяивается решение
+    command: ["trustvpn-container-if-start", "-u", "localhost"]     # <------------------  Вместо localhost необходимо задать имя хоста или внешний IP адрес сервера, на котором разворачивается решение
     ports:
       - "1194:1194/udp"
     cap_add:
