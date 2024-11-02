@@ -5,21 +5,23 @@
 #   docker exec -it trustvpn-db psql -U postgres
 # docker compose up trustvpn-backend
 
-version: '3'
 services:
   trustvpn-backend:
     container_name: trustvpn-backend
     image: ghcr.io/maxirmx/trustvpn-backend:latest
     ports:
-      - "8081:80"
+      - "8080:8080"
+      - "8081:8081"
     depends_on:
       - trustvpn-db
       - trustvpn-container
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - logdata:/app/logs
+
   trustvpn-db:
     container_name: trustvpn-db
-    image: postgres:12
+    image: postgres:16.2
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -44,3 +46,5 @@ services:
 volumes:
   pgdata: {}
   ovpndata: {}
+  logdata: {}
+	
