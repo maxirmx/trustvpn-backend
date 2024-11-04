@@ -130,3 +130,7 @@ $RECYCLE.BIN/
 .DS_Store
 
 _NCrunch*
+.mono/
+.vs/
+**/logs/
+cfg/

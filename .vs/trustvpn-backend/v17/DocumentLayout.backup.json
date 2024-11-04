@@ -1,0 +1,286 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "R:\\Projects\\12.Projects\\trustvpn-backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\services\\trustvpnbasecontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\services\\trustvpnbasecontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\models\\errmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\models\\errmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\controllers\\authorizationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\controllers\\authorizationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\services\\trustvpnservicecontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\services\\trustvpnservicecontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\data\\usercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\data\\usercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\controllers\\trustvpncontrollerbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\controllers\\trustvpncontrollerbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\models\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\models\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\data\\dbensure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\data\\dbensure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\models\\status.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\models\\status.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\services\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\services\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|r:\\projects\\12.projects\\trustvpn-backend\\trustvpn-backend\\extensions\\loggerextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{258359AB-9266-4003-9CF0-B45841878427}|trustvpn-backend\\trustvpn-backend.csproj|solutionrelative:trustvpn-backend\\extensions\\loggerextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 1358,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ErrMessage.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Models\\ErrMessage.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Models\\ErrMessage.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Models\\ErrMessage.cs",
+              "RelativeToolTip": "trustvpn-backend\\Models\\ErrMessage.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAywBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:15:16.05Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Dockerfile",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Dockerfile",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Dockerfile",
+              "RelativeToolTip": "trustvpn-backend\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-04T08:53:04.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TrustVpnControllerBase.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Controllers\\TrustVpnControllerBase.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Controllers\\TrustVpnControllerBase.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Controllers\\TrustVpnControllerBase.cs",
+              "RelativeToolTip": "trustvpn-backend\\Controllers\\TrustVpnControllerBase.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAswEMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:18:23.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DbEnsure.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Data\\DbEnsure.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Data\\DbEnsure.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Data\\DbEnsure.cs",
+              "RelativeToolTip": "trustvpn-backend\\Data\\DbEnsure.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAQwEEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:33:09.657Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserContext.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Data\\UserContext.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Data\\UserContext.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Data\\UserContext.cs",
+              "RelativeToolTip": "trustvpn-backend\\Data\\UserContext.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:34:12.974Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TrustVpnBaseContainer.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Services\\TrustVpnBaseContainer.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Services\\TrustVpnBaseContainer.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Services\\TrustVpnBaseContainer.cs",
+              "RelativeToolTip": "trustvpn-backend\\Services\\TrustVpnBaseContainer.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAmwGIAAACsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-03T19:15:36.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TrustVpnServiceContainer.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Services\\TrustVpnServiceContainer.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Services\\TrustVpnServiceContainer.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Services\\TrustVpnServiceContainer.cs",
+              "RelativeToolTip": "trustvpn-backend\\Services\\TrustVpnServiceContainer.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAxwDUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-03T19:15:40.066Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Models\\User.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Models\\User.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Models\\User.cs",
+              "RelativeToolTip": "trustvpn-backend\\Models\\User.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAIA+wFIAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:40:35.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Controllers\\UsersController.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "trustvpn-backend\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAwEMAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:38:55.006Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Status.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Models\\Status.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Models\\Status.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Models\\Status.cs",
+              "RelativeToolTip": "trustvpn-backend\\Models\\Status.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAvwBoAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:09:12.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthorizationController.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Controllers\\AuthorizationController.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Controllers\\AuthorizationController.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Controllers\\AuthorizationController.cs",
+              "RelativeToolTip": "trustvpn-backend\\Controllers\\AuthorizationController.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAApwD0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:01:07.13Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Profile.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Models\\Profile.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Models\\Profile.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Models\\Profile.cs",
+              "RelativeToolTip": "trustvpn-backend\\Models\\Profile.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAC0AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:27:48.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Logger.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Services\\Logger.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Services\\Logger.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Services\\Logger.cs",
+              "RelativeToolTip": "trustvpn-backend\\Services\\Logger.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAxwBkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T05:34:01.008Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\appsettings.json",
+              "RelativeDocumentMoniker": "trustvpn-backend\\appsettings.json",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\appsettings.json",
+              "RelativeToolTip": "trustvpn-backend\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-03T19:09:24.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Program.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Program.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Program.cs",
+              "RelativeToolTip": "trustvpn-backend\\Program.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADwAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-03T18:57:40.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "LoggerExtension.cs",
+              "DocumentMoniker": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Extensions\\LoggerExtension.cs",
+              "RelativeDocumentMoniker": "trustvpn-backend\\Extensions\\LoggerExtension.cs",
+              "ToolTip": "R:\\Projects\\12.Projects\\trustvpn-backend\\trustvpn-backend\\Extensions\\LoggerExtension.cs",
+              "RelativeToolTip": "trustvpn-backend\\Extensions\\LoggerExtension.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAIBMwCQAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-03T19:38:05.351Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

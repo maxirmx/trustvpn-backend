@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "trustvpn-backend", "trustvpn-backend.csproj", "{258359AB-9266-4003-9CF0-B45841878427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "trustvpn-backend", "trustvpn-backend\trustvpn-backend.csproj", "{258359AB-9266-4003-9CF0-B45841878427}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F4703CD9-0E71-426E-9CD6-0C8D1E2B16D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{258359AB-9266-4003-9CF0-B45841878427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{258359AB-9266-4003-9CF0-B45841878427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{258359AB-9266-4003-9CF0-B45841878427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4703CD9-0E71-426E-9CD6-0C8D1E2B16D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4703CD9-0E71-426E-9CD6-0C8D1E2B16D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4703CD9-0E71-426E-9CD6-0C8D1E2B16D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4703CD9-0E71-426E-9CD6-0C8D1E2B16D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

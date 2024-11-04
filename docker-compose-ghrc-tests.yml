@@ -1,10 +1,14 @@
+# Copyright (c) 2023 Maxim [maxirmx] Samsonov (https://sw.consulting)
+# This file is a part of TrustVPN
+
+# docker compose build
+#   docker exec -it trustvpn-db psql -U postgres
+# docker compose up trustvpn-backend
+
 services:
   trustvpn-backend:
     container_name: trustvpn-backend
-    image: ${DOCKER_REGISTRY-}trustvpnbackend
-    build:
-      context: .
-      dockerfile: trustvpn-backend/Dockerfile
+    image: ghcr.io/maxirmx/trustvpn-backend:latest
     ports:
       - "8080:8080"
       - "8081:8081"
@@ -13,8 +17,8 @@ services:
       - trustvpn-container
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      ConnectionStrings__DefaultConnection: "Host=trustvpn-db;Database=postgres;Username=postgres;Password=postgres"
+      - logdata:/app/logs
+
   trustvpn-db:
     container_name: trustvpn-db
     image: postgres:16.2
@@ -22,14 +26,12 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
-#    ports:
-#      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   trustvpn-container:
     container_name: trustvpn-container
-    image: ghcr.io/maxirmx/trustvpn-container:0.2.4
+    image: ghcr.io/maxirmx/trustvpn-container:latest
     command: ["trustvpn-container-if-start", "-u", "localhost"]
     ports:
       - "1194:1194/udp"
@@ -41,6 +43,16 @@ services:
     volumes:
       - ovpndata:/etc/openvpn
 
+  trustvpn-tests:
+    build: ./tests
+    image: trustvpn-tests
+    container_name: trustvpn-tests
+    command: ["run", "/home/trustvpn-tests/postman.json"]
+    depends_on:
+      - trustvpn-backend
+
 volumes:
   pgdata: {}
   ovpndata: {}
+  logdata: {}
+	
