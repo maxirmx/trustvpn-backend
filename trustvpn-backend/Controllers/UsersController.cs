@@ -228,7 +228,7 @@ public class UsersController(
         userContext.Entry(user).State = EntityState.Modified;
 
         await userContext.SaveChangesAsync();
-        _logger.LogDebug("PutUser returning '204 No content");
+        _logger.LogDebug("PutUser returning '204 No content'");
         return NoContent();
     }
 

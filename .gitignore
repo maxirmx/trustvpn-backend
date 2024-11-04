@@ -131,6 +131,6 @@ $RECYCLE.BIN/
 
 _NCrunch*
 .mono/
-.vs/
+**/.vs/
 **/logs/
 cfg/

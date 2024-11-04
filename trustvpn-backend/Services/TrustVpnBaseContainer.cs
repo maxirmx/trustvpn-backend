@@ -71,7 +71,7 @@ public class TrustVpnBaseContainer
 
         string[] command = [.. _shell, cmd];
 
-        _logger.LogDebug("Executing command {cmd} in {cnt}", cmd, _containerName);
+        _logger.LogDebug("Executing command '{cmd}' in '{cnt}'", cmd, _containerName);
 
         try {
             var dockerClient = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
@@ -90,17 +90,17 @@ public class TrustVpnBaseContainer
 
 
             if (execInspectResponse.ExitCode != 0) {
-                _logger.LogDebug("Command {cmd} in {cnt} exited with code {code}\nStdout >>>>\n{stdout}\n<<<< End of stdout\nStderr >>>>\n{stderr}\n<<<< End of stderr\n",
+                _logger.LogDebug("Command '{cmd}' in '{cnt}' exited with code {code}\nStdout >>>>\n{stdout}\n<<<< End of stdout\nStderr >>>>\n{stderr}\n<<<< End of stderr\n",
                                   cmd, _containerName, execInspectResponse.ExitCode, output, stderr);
                 output = stderr;
             }
             else
             {
-                _logger.LogDebug("Command {cmd} in {cnt} completed successfully (exit code 0). Sensitive output information was hidden from the log.", cmd, _containerName);
+                _logger.LogDebug("Command '{cmd}' in '{cnt}' completed successfully (exit code 0). Sensitive output information was hidden from the log.", cmd, _containerName);
             }
         }
         catch (Exception e) {
-            _logger.LogError("Failed to execute command {cmd} in {cnt}:\n{msg}", cmd, _containerName, e.Message);
+            _logger.LogError("Failed to execute command '{cmd}' in '{cnt}':\n{msg}", cmd, _containerName, e.Message);
         }
 
         return output;

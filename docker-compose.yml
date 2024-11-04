@@ -1,3 +1,5 @@
+# Copyright (c) 2023-2024 Maxim [maxirmx] Samsonov (https://sw.consulting)
+
 services:
   trustvpn-backend:
     container_name: trustvpn-backend
