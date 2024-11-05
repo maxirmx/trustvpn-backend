@@ -1,3 +1,5 @@
+[![build-and-push](https://github.com/maxirmx/trustvpn-backend/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/maxirmx/trustvpn-backend/actions/workflows/build-and-push.yml)
+
 # TrustVPN backend server API
 ## Установка
 Приложение поставляется в виде трёх контейнеров докер.
