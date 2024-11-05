@@ -55,7 +55,7 @@ public class TrustVpnBaseContainer
             }
         }
         catch (Exception e) {
-            _logger.LogError("Failed to fetch container id for {name}:\n{msg}", _containerName, e);
+            _logger.LogError("Failed to fetch container id for '{name}':\n{msg}", _containerName.ToString(), e);
         }
 
         return _containerId;
@@ -71,7 +71,7 @@ public class TrustVpnBaseContainer
 
         string[] command = [.. _shell, cmd];
 
-        _logger.LogDebug("Executing command '{cmd}' in '{cnt}'", cmd, _containerName);
+        _logger.LogDebug("Executing command '{cmd}' in '{cnt}'", cmd.ToString(), _containerName.ToString());
 
         try {
             var dockerClient = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
@@ -91,7 +91,7 @@ public class TrustVpnBaseContainer
 
             if (execInspectResponse.ExitCode != 0) {
                 _logger.LogDebug("Command '{cmd}' in '{cnt}' exited with code {code}\nStdout >>>>\n{stdout}\n<<<< End of stdout\nStderr >>>>\n{stderr}\n<<<< End of stderr\n",
-                                  cmd, _containerName, execInspectResponse.ExitCode, output, stderr);
+                                  cmd.ToString(), _containerName.ToString(), execInspectResponse.ExitCode, output, stderr);
                 output = stderr;
             }
             else
@@ -100,7 +100,7 @@ public class TrustVpnBaseContainer
             }
         }
         catch (Exception e) {
-            _logger.LogError("Failed to execute command '{cmd}' in '{cnt}':\n{msg}", cmd, _containerName, e.Message);
+            _logger.LogError("Failed to execute command '{cmd}' in '{cnt}':\n{msg}", cmd.ToString(), _containerName.ToString(), e.Message);
         }
 
         return output;

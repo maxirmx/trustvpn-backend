@@ -11,8 +11,10 @@ services:
       - "8080:8080"
       - "8081:8081"
     depends_on:
-      - trustvpn-db
-      - trustvpn-container
+      trustvpn-db:
+        condition: service_healthy
+      trustvpn-container:
+        condition: service_healthy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -21,17 +23,21 @@ services:
     container_name: trustvpn-db
     image: postgres:16.2
     environment:
+      - PGUSER=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
-#    ports:
-#      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   trustvpn-container:
     container_name: trustvpn-container
-    image: ghcr.io/maxirmx/trustvpn-container:0.2.4
+    image: ghcr.io/maxirmx/trustvpn-container:latest
     command: ["trustvpn-container-if-start", "-u", "localhost"]
     ports:
       - "1194:1194/udp"
@@ -40,6 +46,11 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
       - net.ipv6.conf.all.forwarding=1
+    healthcheck:
+      test: ["CMD", "openvpn-check"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
     volumes:
       - ovpndata:/etc/openvpn
 

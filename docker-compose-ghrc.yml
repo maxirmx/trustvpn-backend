@@ -8,17 +8,25 @@ services:
     container_name: trustvpn-backend
     image: ghcr.io/maxirmx/trustvpn-backend:latest
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/etc/certificate/sw_consulting.pfx
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=<password>
+      ConnectionStrings__DefaultConnection: "Host=trustvpn-db;Database=postgres;Username=postgres;Password=postgres"
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: 8080
+      ASPNETCORE_HTTPS_PORTS: 8081
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/etc/certificate/sw_consulting.pfx"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "M24!Spaniel"
     ports:
       - "8080:8080"
       - "8081:8081"
     depends_on:
-      - trustvpn-db
-      - trustvpn-container
+      trustvpn-db:
+        condition: service_healthy
+      trustvpn-container:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "localhost:8080/api/auth/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
     volumes:
       - /etc/nginx/certificate:/etc/certificate
       - /var/run/docker.sock:/var/run/docker.sock
@@ -28,9 +36,15 @@ services:
     container_name: trustvpn-db
     image: postgres:16.2
     environment:
+      - PGUSER=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - /var/o-service/pgdata:/var/lib/postgresql/data
 
@@ -45,5 +59,10 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
       - net.ipv6.conf.all.forwarding=1
+    healthcheck:
+      test: ["CMD", "openvpn-check"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
     volumes:
       - /var/o-service/ovpn:/etc/openvpn

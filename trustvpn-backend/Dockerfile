@@ -6,11 +6,14 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+# Install curl
+RUN apt-get update && apt-get install -y curl
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
 COPY ["trustvpn-backend/trustvpn-backend.csproj", "trustvpn-backend/"]
 RUN dotnet restore "./trustvpn-backend/trustvpn-backend.csproj"
 COPY . .
@@ -26,4 +29,5 @@ RUN dotnet publish "./trustvpn-backend.csproj" -c $BUILD_CONFIGURATION -o /app/p
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "trustvpn-backend.dll"]
