@@ -11,8 +11,17 @@ services:
       - "8080:8080"
       - "8081:8081"
     depends_on:
-      - trustvpn-db
-      - trustvpn-container
+      trustvpn-db:
+        condition: service_healthy
+      trustvpn-container:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=trustvpn-db;Database=postgres;Username=postgres;Password=postgres"
+    healthcheck:
+      test: ["CMD", "curl", "localhost:8080/api/auth/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - logdata:/app/logs
@@ -21,9 +30,15 @@ services:
     container_name: trustvpn-db
     image: postgres:16.2
     environment:
+      - PGUSER=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -38,6 +53,11 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
       - net.ipv6.conf.all.forwarding=1
+    healthcheck:
+      test: ["CMD-SHELL", "true"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - ovpndata:/etc/openvpn
 
@@ -47,7 +67,8 @@ services:
     container_name: trustvpn-tests
     command: ["run", "/home/trustvpn-tests/postman.json"]
     depends_on:
-      - trustvpn-backend
+      trustvpn-backend:
+        condition: service_healthy
 
 volumes:
   pgdata: {}
