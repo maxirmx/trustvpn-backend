@@ -1,35 +1,58 @@
 # TrustVPN backend server API
 ## Установка
 Приложение поставляется в виде трёх контейнеров докер.
-Для развёртывания нужно использовать файл ```docker-compose-ghrc.yml```  внеся в него две модификации, как указано ниже
+В качестве примера развёртывания приведён файл ```docker-compose-ghrc.yml```
 
 ```
-version: '3'
 services:
   trustvpn-backend:
     container_name: trustvpn-backend
     image: ghcr.io/maxirmx/trustvpn-backend:latest
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=trustvpn-db;Database=postgres;Username=postgres;Password=postgres"
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: 8080
+      ASPNETCORE_HTTPS_PORTS: 8081
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/etc/certificate/sw_consulting.pfx"  
+      ASPNETCORE_Kestrel__Certificates__Default__Password: <password>
     ports:
-      - "8081:80"                                                  # <------------------  Вместо 8081 необходимо задать порт, на котором будет доступно API
+      - "8080:8080"
+      - "8081:8081"
     depends_on:
-      - trustvpn-db
-      - trustvpn-container
+      trustvpn-db:
+        condition: service_healthy
+      trustvpn-container:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "localhost:8080/api/auth/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
     volumes:
+      - /etc/nginx/certificate:/etc/certificate
       - /var/run/docker.sock:/var/run/docker.sock
+      - /var/o-service/logs:/app/logs
+
   trustvpn-db:
     container_name: trustvpn-db
-    image: postgres:12
+    image: postgres:16.2
     environment:
+      - PGUSER=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - /var/o-service/pgdata:/var/lib/postgresql/data
 
   trustvpn-container:
     container_name: trustvpn-container
     image: ghcr.io/maxirmx/trustvpn-container:latest
-    command: ["trustvpn-container-if-start", "-u", "localhost"]     # <------------------  Вместо localhost необходимо задать имя хоста или внешний IP адрес сервера, на котором разворачивается решение
+    command: ["trustvpn-container-if-start", "-u", "o-service.sw.consulting"]
     ports:
       - "1194:1194/udp"
     cap_add:
@@ -37,12 +60,13 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
       - net.ipv6.conf.all.forwarding=1
+    healthcheck:
+      test: ["CMD", "openvpn-check"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
     volumes:
-      - ovpndata:/etc/openvpn
-
-volumes:
-  pgdata: {}
-  ovpndata: {}
+      - /var/o-service/ovpn:/etc/openvpn
 ```
 
 
