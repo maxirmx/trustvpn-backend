@@ -13,7 +13,7 @@ services:
       ASPNETCORE_HTTP_PORTS: 8080
       ASPNETCORE_HTTPS_PORTS: 8081
       ASPNETCORE_Kestrel__Certificates__Default__Path: "/etc/certificate/sw_consulting.pfx"
-      ASPNETCORE_Kestrel__Certificates__Default__Password: "M24!Spaniel"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: <password>
     ports:
       - "8080:8080"
       - "8081:8081"
