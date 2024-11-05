@@ -150,7 +150,7 @@ public class DbEnsure
         {
             _logger.LogInformation("Initializing database at 0.1.4");
             Ensure_0_1_4(connection);
-            _logger.LogInformation("Database version 0.2.1");
+            _logger.LogInformation("Database version 0.2.4");
             PuVersionUpdate("0.2.1", connection);
         }
         catch (Exception ex)

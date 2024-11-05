@@ -55,7 +55,7 @@ public class ProfilesController(
     {
         _logger.LogDebug("Get all profiles");
         var res = await profileContext.Profiles.ToListAsync();
-        _logger.LogDebug("Get all profiles returning:\n {res}\n", JsonSerializer.Serialize(res, JOptions.DefaultOptions));
+        _logger.LogDebug("GetProfiles returning:\n {res}\n", JsonSerializer.Serialize(res, JOptions.DefaultOptions));
         return res;
     }
 
