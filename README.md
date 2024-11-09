@@ -1,6 +1,6 @@
 [![build-and-push](https://github.com/maxirmx/trustvpn-backend/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/maxirmx/trustvpn-backend/actions/workflows/build-and-push.yml)
 
-# TrustVPN backend server API
+# O!Service backend server API
 ## Установка
 Приложение поставляется в виде трёх контейнеров докер.
 В качестве примера развёртывания приведён файл ```docker-compose-ghrc.yml```
